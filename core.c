@@ -10,7 +10,7 @@ void core_initialization(core_t* core) {
 	core->previous_time = SDL_GetTicks() / 1000.0;
 	core->accumulator = 0.0;
 
-	video_initialization(core->video);
+	video_initialization(&core->video);
 }
 
 void core_update(core_t* core) {
@@ -20,12 +20,11 @@ void core_update(core_t* core) {
 	/*input_update()*/
 	while(core->accumulator >= FIXED_TIMESTEP) {
 		/*logic_update();*/
-		printf("Game advances one step.\n");
 		core->accumulator -= FIXED_TIMESTEP;
 	}
 	/*render_update(remderstate_t* renderstate);*/
 }
 
 void core_shutdown(core_t* core) {
-	video_shutdown(core->video);
+	video_shutdown(&core->video);
 }
