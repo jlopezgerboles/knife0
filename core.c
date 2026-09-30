@@ -9,6 +9,8 @@ void core_initialization(core_t* core) {
 	core->running = 1;
 	core->previous_time = SDL_GetTicks() / 1000.0;
 	core->accumulator = 0.0;
+
+	video_initialization(core->video);
 }
 
 void core_update(core_t* core) {
@@ -25,4 +27,5 @@ void core_update(core_t* core) {
 }
 
 void core_shutdown(core_t* core) {
+	video_shutdown(core->video);
 }
