@@ -22,7 +22,7 @@ void core_update(core_t* core) {
 		/*logic_update();*/
 		core->accumulator -= FIXED_TIMESTEP;
 	}
-	/*render_update(remderstate_t* renderstate);*/
+	video_update(&core->video);
 }
 
 void core_shutdown(core_t* core) {

@@ -7,6 +7,7 @@ typedef struct video_t {
 	int video_width;
 	int video_height;
 	SDL_Window* window;
+	SDL_GLContext context;
 } video_t;
 
 void video_initialization(video_t* video);
