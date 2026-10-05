@@ -13,16 +13,30 @@ void core_initialization(core_t* core) {
 	video_initialization(&core->video);
 }
 
-void core_update(core_t* core) {
-	const double current_time = SDL_GetTicks();
-	core->accumulator += current_time - core->previous_time;
-	core->previous_time = current_time;
-	/*input_update()*/
-	while(core->accumulator >= FIXED_TIMESTEP) {
-		/*logic_update();*/
-		core->accumulator -= FIXED_TIMESTEP;
-	}
-	video_update(&core->video);
+void core_update(core_t *core) {
+    SDL_Event event;
+    double current_time;
+
+    while (SDL_PollEvent(&event)) {
+        if (event.type == SDL_EVENT_QUIT) {
+            core->running = 0;
+        }
+    }
+
+    if (!core->running) {
+        return;
+    }
+
+    current_time = SDL_GetTicks() / 1000.0;
+    core->accumulator += current_time - core->previous_time;
+    core->previous_time = current_time;
+
+    while (core->accumulator >= FIXED_TIMESTEP) {
+        /* logic_update(); */
+        core->accumulator -= FIXED_TIMESTEP;
+    }
+
+    video_update(&core->video);
 }
 
 void core_shutdown(core_t* core) {
