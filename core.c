@@ -10,7 +10,10 @@ void core_initialization(core_t* core) {
 	core->previous_time = SDL_GetTicks() / 1000.0;
 	core->accumulator = 0.0;
 
+	input_initialization(&core->input);
+	controller_initialization();
 	video_initialization(&core->video);
+
 }
 
 void core_update(core_t *core) {
@@ -31,8 +34,11 @@ void core_update(core_t *core) {
     core->accumulator += current_time - core->previous_time;
     core->previous_time = current_time;
 
+    input_update(&core->input);
+
     while (core->accumulator >= FIXED_TIMESTEP) {
-        /* logic_update(); */
+	controller_update(&core->input, &core->logic);
+        logic_update(&core->logic);
         core->accumulator -= FIXED_TIMESTEP;
     }
 

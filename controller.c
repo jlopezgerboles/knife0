@@ -1,11 +1,7 @@
-#include "input.h"
-#include "logic.h"
+#include "controller.h"
 
 static SDL_Scancode keymap[BUTTON_COUNT];
 
-/* Bridges the gap between hartdware input recognition
- * and the Button recognizes by logic
- */
 void controller_initialization() {
 	keymap[BUTTON_LEFT] = SDL_SCANCODE_LEFT;
 	keymap[BUTTON_UP] = SDL_SCANCODE_UP;

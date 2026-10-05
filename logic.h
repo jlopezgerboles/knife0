@@ -19,4 +19,6 @@ typedef struct logic_t {
 	int button_released[BUTTON_COUNT];
 } logic_t;
 
+void logic_update(logic_t* logic);
+
 #endif
